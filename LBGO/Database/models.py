@@ -7,6 +7,12 @@ class Question(models.Model):
     question_id = models.AutoField(primary_key = True)
     content = models.CharField(max_length = 100)
 
+    def __unicode__(self):
+        return self.content
+
+    def __str__(self):
+        return self.content
+
 class Objective(models.Model):
     name = models.CharField(max_length= 100,primary_key=True)
     code = models.CharField(max_length=3, blank=True, null=True)
@@ -17,6 +23,9 @@ class Team(models.Model):
     owner = models.ForeignKey(User,on_delete=models.PROTECT)
     name = models.CharField(max_length=100, primary_key=True)
     members = models.ManyToManyField(User,related_name='members')
+
+    def __str__(self):
+        return self.name
 
 class Event(models.Model):
     name = models.CharField(max_length=100);
