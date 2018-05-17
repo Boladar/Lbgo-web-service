@@ -13,4 +13,5 @@ urlpatterns = [
     path('<str:username>/events/past/',views.UserPastEventsAPIView.as_view()),
     path('<str:username>/events/upcoming/',views.UserUpcomingEventsAPIView.as_view()),
     path('<str:username>/events/all/',views.UserAllEventsAPIView.as_view()),
+    path('objectives/<str:event_code>/<str:code>/',views.ObjectiveAPIView.as_view()),
 ]

@@ -8,9 +8,20 @@ from rest_framework import viewsets
 from rest_framework.generics import ListAPIView
 # Create your views here.
 
+class ObjectiveAPIView(ListAPIView):
+    serializer_class = ObjectiveSerializer
+
+    def get_queryset(self):
+        objective_code = self.kwargs['code']
+
+        if objective_code is not None:
+            queryset = Objective.objects.filter(code__exact = objective_code )
+            return queryset
+
+
 class UserAllEventsAPIView(ListAPIView):
     serializer_class = EventSerializer
-    
+
     def get_queryset(self):
         queryset = Event.objects.all()
 
@@ -28,7 +39,7 @@ class UserUpcomingEventsAPIView(ListAPIView):
 
         username =  self.kwargs['username']
         if username is not None:
-            queryset = queryset.filter(teams__members__username__exact = username)
+            queryset = queryset.filter(teams__members__username__exact = username,endTime__isnull = False)
 
         return queryset
 
@@ -40,7 +51,7 @@ class UserPastEventsAPIView(ListAPIView):
 
         username =  self.kwargs['username']
         if username is not None:
-            queryset = queryset.filter(teams__members__username__exact = username)
+            queryset = queryset.filter(teams__members__username__exact = username,endTime__isnull = True)
 
         return queryset
 
