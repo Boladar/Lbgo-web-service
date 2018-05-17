@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from django.contrib.auth.models import User
 from Database.models import Question, Objective, Team, Event
 
 class QuestionSerializer(serializers.ModelSerializer):

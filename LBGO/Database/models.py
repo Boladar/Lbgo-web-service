@@ -14,7 +14,7 @@ class Question(models.Model):
         return self.content
 
 class Anwser(models.Model):
-    question = models.ForeignKey(Question,on_delete = models.PROTECT)
+    question_id = models.IntegerField()
     content = models.CharField(max_length = 1000, blank=True, null=True)
 
 class Objective(models.Model):

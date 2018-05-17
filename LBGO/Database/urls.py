@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 router.register('events', views.EventViewSet)
 
 urlpatterns = [
-    path('',include(router.urls)),
+    path('', include(router.urls)),
     path('api-auth', include('rest_framework.urls', namespace='rest_framework')),
     path('<str:username>/events/past/',views.UserPastEventsAPIView.as_view()),
     path('<str:username>/events/upcoming/',views.UserUpcomingEventsAPIView.as_view()),
