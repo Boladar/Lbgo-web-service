@@ -29,7 +29,8 @@ class Team(models.Model):
 
 class Event(models.Model):
     name = models.CharField(max_length=100);
-    startTime = models.DateTimeField(blank=True, null=True);
+    startTime = models.DateTimeField(blank=True, null=True)
+    endTime = models.DateTimeField(blank=True, null=True)
     teams = models.ManyToManyField(Team,related_name='teams')
     objectives = models.ManyToManyField(Objective,related_name='objectives')
 
