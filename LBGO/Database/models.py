@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.core.files.uploadedfile import InMemoryUploadedFile
+import qrcode
 # Create your models here.
 
 class Question(models.Model):
@@ -17,12 +19,30 @@ class Anwser(models.Model):
     question_id = models.IntegerField()
     content = models.CharField(max_length = 1000, blank=True, null=True)
 
+
 class Objective(models.Model):
     name = models.CharField(max_length= 100,primary_key=True)
     code = models.CharField(max_length=3, blank=True, null=True)
     description = models.CharField(max_length=1024, blank=True, null=True)
     questions = models.ManyToManyField(Question, related_name='questions')
     event = models.ForeignKey('Event',on_delete=models.PROTECT, blank=True, null=True)
+    qrCode = models.ImageField(upload_to='qrcode',blank=True, null=True)
+
+    def construct_qr_code_path(self,event_name,objective_code):
+        pass
+
+    def generate_qr_code(self):
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=6,
+            border=0,
+        )
+        qr.add_data(self.event.name + '/' + self.code)
+        qr.make(fit=True)
+
+        img = qr.make_image()
+
 
 class Team(models.Model):
     owner = models.ForeignKey(User,on_delete=models.PROTECT)
@@ -35,7 +55,7 @@ class Team(models.Model):
         return self.name
 
 class Event(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, primary_key= True)
     startTime = models.DateTimeField(blank=True, null=True)
     endTime = models.DateTimeField(blank=True, null=True)
     teams = models.ManyToManyField(Team,related_name='teams')
