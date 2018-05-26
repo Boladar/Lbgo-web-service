@@ -26,22 +26,6 @@ class Objective(models.Model):
     description = models.CharField(max_length=1024, blank=True, null=True)
     questions = models.ManyToManyField(Question, related_name='questions')
     event = models.ForeignKey('Event',on_delete=models.PROTECT, blank=True, null=True)
-    qrCode = models.ImageField(upload_to='qrcode',blank=True, null=True)
-
-    def construct_qr_code_path(self,event_name,objective_code):
-        pass
-
-    def generate_qr_code(self):
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=6,
-            border=0,
-        )
-        qr.add_data(self.event.name + '/' + self.code)
-        qr.make(fit=True)
-
-        img = qr.make_image()
 
 
 class Team(models.Model):

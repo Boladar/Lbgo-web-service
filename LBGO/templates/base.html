@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {%load staticfiles %}
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,15 +9,17 @@
 </head>
 <body>
 
-    <div id='qrcode'>
+    <header>
 
-    </div>
+    </header>
 
-    <script>
-    var eventName = "{{eventName}}";
-    var objectiveCode = "{{objectiveCode}}";
+    {% block content %}
+    
+    {% endblock content %}
 
-    new QRCode(document.getElementById('qrcode'),eventName + '/' + objectiveCode + '/')
-    </script>
+    <footer>
+
+    </footer>
+
 </body>
 </html>
