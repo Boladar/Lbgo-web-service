@@ -41,7 +41,7 @@ class UserUpcomingEventsAPIView(ListAPIView):
 
         username =  self.kwargs['username']
         if username is not None:
-            queryset = queryset.filter(teams__members__username__exact = username,endTime__isnull = False)
+            queryset = queryset.filter(teams__members__username__exact = username,endTime__isnull = True)
 
         return queryset
 
@@ -54,7 +54,7 @@ class UserPastEventsAPIView(ListAPIView):
 
         username =  self.kwargs['username']
         if username is not None:
-            queryset = queryset.filter(teams__members__username__exact = username,endTime__isnull = True)
+            queryset = queryset.filter(teams__members__username__exact = username,endTime__isnull = False)
 
         return queryset
 

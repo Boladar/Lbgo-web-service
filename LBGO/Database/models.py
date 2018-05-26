@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from django.core.files.uploadedfile import InMemoryUploadedFile
-import qrcode
 # Create your models here.
 
 class Question(models.Model):
